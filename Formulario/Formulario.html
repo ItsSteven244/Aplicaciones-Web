@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+
+    <link rel="stylesheet" href="style.css"> <!-- Enlazar con CSS -->
+    <script src="script.js"></script> <!-- Enlazar con JS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"> <!-- Letra:Roboto -->
+
+
+</head>
+<body>
+    
+<div class="cuadro">
+
+    <h1 class="centrar aumentar colorletra">Formulario</h1> <!-- Use la clase centrar del css -->
+
+    <form id="Formulario">
+
+        <input type="text" id="cedula" name="Cedula" placeholder="Cédula">
+        <span id="cedula-error" class="error-message"></span>  <!-- Mensaje de error para Cédula -->
+
+        <input type="text" id="nombre" name="Nombre" placeholder="Nombres"> 
+        <span id="nombre-error" class="error-message"></span>  <!-- Mensaje de error para Nombre -->
+
+        <input type="text" id="apellido" name="Apellido" placeholder="Apellidos"> 
+        <span id="apellido-error" class="error-message"></span>  <!-- Mensaje de error para Apellido -->
+
+        <input type="text" id="direccion" name="Direccion" placeholder="Dirección"> 
+        <span id="direccion-error" class="error-message"></span> <!-- Mensaje de error para Dirección -->
+
+        <input type="text" id="telefono" name="Telefono" placeholder="Teléfono"> 
+        <span id="telefono-error" class="error-message"></span> <!-- Mensaje de error para Teléfono -->
+
+        <input type="text" id="email" name="Email" placeholder="Email"> 
+        <span id="email-error" class="error-message"></span> <!-- Mensaje de error para Email -->
+
+        
+        <button type="submit" class="centrar-boton"><strong>Enviar</strong></button>    <!-- Botón de envío -->
+
+    <form>
+</div>
+
+</body>
+</html>

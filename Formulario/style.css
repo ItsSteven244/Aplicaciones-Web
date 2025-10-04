@@ -1,0 +1,64 @@
+/*Fondo*/
+body{background-color: rgb(158, 181, 177);/*color de fondo*/
+    font-family: 'Roboto';} /*Letra que toda la página tendra*/
+
+/*Cuadro*/
+.cuadro{background-color: rgb(16, 39, 45);
+width: 500px;
+margin: auto;   /*Centrar hoja*/
+padding: 20px;  /*Para espacio interno*/
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);    /*Para simular sombra*/
+}
+
+/*Centrar texto*/
+.centrar{text-align: center;}
+
+/*Tamaño de letra 3 veces mayor*/
+.aumentar{font-size: 3em;}
+
+/*Color de letra*/
+.colorletra{color: rgb(255, 255, 255);}
+
+/*Confi. del campo de texto*/
+input[type="text"] {
+    width: 100%;  /* Esto asegura que el input ocupe todo el ancho disponible */
+    margin-bottom: 2px; /* Espacio debajo del campo */
+    height: 40px;
+    font-size: 1.1em;
+    background-color: rgb(85, 86, 96);
+    border: none; /* Elimina cualquier borde */
+    padding: 10px; /* Espaciado dentro del campo, para el placeholder */
+}
+
+/*Asegura un buen ancho*/
+* {
+    box-sizing: border-box; /* Esto asegura que padding y border no afecten el tamaño total */
+}
+
+/*Color al placeholder (El texto que sale en el campo)*/
+input::placeholder {
+    color: #ddd6d6; /* Cambia el color del placeholder (Texto dentro del input) */
+}
+
+/* Estilo de los mensajes de error */
+.error-message {
+    color: red; /* Color rojo para los errores */
+    font-size: 0.8em; /* Tamaño de texto más pequeño */
+    display: block; /* Asegura que el mensaje se muestre debajo del input */
+    margin-bottom: 20px; /* Espacio inferior entre el mensaje de error y el siguiente campo */
+    margin-top: 3px; /* Espacio superior entre el mensaje de error y el siguiente campo */
+}
+
+
+
+/*Centrar solo el botón de envío*/
+.centrar-boton {
+    display: block;  /* Hace que el botón sea un bloque */
+    margin: 0 auto;  /* Centra el botón horizontalmente */
+    background-color: rgb(79, 175, 137); /* Color de fondo del botón (verde) */
+    color:rgb(0, 0, 0); /* Color del texto */
+    padding: 14px 100px; /* Espaciado dentro del botón (arriba/abajo, izquierda/derecha), PD: aumenta el tamaño */
+    border-radius: 15px; /* Bordes redondeados */
+    font-size: 1.1em; /* Tamaño del texto */
+    cursor: pointer; /* Esto es un detalle, cambia el cursor al pasar sobre el botón */
+}
