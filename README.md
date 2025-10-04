@@ -1,11 +1,10 @@
-# Hoja de Vida
+# Tareas de Aplicaciones Web
 
-Tarea de Aplicaciones Web
+HTML, CSS, JS
 
 ## Contenido
-- `Hoja de vida personal`: carpeta principal
-- `imagenes/`: carpeta con las imágenes utilizadas
-- 'Tarea.html': archivo html 
+- `Hoja de vida personal`: Proyecto 1
+- `Formulario/`: Proyecto 2
 
 ## Autor
 - **Steven Alexis Soledispa Espinales**
