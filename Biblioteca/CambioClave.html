@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambio de Clave</title>
+  <link rel="stylesheet" href="css/CambioClave.css">
+</head>
+<body>
+
+  <!-- Modal Cambio de Clave -->
+  <div id="modalCambioClave" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarModal()">&times;</span>
+      <h2>Cambiar Contraseña</h2>
+      <form id="formCambioClave">
+        <div class="campo">
+          <label for="nuevaClave">Nueva clave</label>
+          <input type="password" id="nuevaClave" name="nuevaClave" required>
+        </div>
+        <div class="campo">
+          <label for="confirmarClave">Confirmar clave</label>
+          <input type="password" id="confirmarClave" name="confirmarClave" required>
+        </div>
+        <button type="submit">Cambiar clave</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/cambioclave.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - Biblioteca</title>
+  <link rel="stylesheet" href="css/Menu.css">
+  <script src="js/submenu.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <aside class="menu">
+    <div class="menu-superior">
+      <div class="usuario-caja">
+        <div class="avatar">
+          <img src="Imágenes/User.png" alt="Usuario">
+        </div>
+        <div>
+          <p class="nombre">Steven Soledispa</p>
+          <p class="rol">admin</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="opciones">
+      <a href="Menu.html" class="opcion"><i class="fas fa-home"></i> Inicio</a>
+      <a href="Libros.html" class="opcion"><i class="fas fa-book"></i> Libros</a>
+      <a href="Prestamos.html" class="opcion"><i class="fas fa-hourglass-half"></i> Préstamos</a>
+      <a href="Estudiantes.html" class="opcion"><i class="fas fa-user-graduate"></i> Estudiantes</a>
+      <a href="Reportes.html" class="opcion"><i class="fas fa-chart-line"></i> Reportes</a>
+      <div class="submenu">
+        <a href="javascript:void(0);" class="opcion" onclick="toggleSubmenu()">
+          <i class="fas fa-cogs"></i> Administración <i class="fas fa-chevron-down flecha-abajo"></i>
+        </a>
+        <ul class="subopciones">
+          <li><a href="Usuarios.html"><i class="fas fa-users"></i> Usuarios</a></li>
+          <li><a href="javascript:void(0);" onclick="openModal()"><i class="fas fa-key"></i> Cambio de clave</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="contenido">
+    <h1 class="titulo">Panel de Administración</h1>
+
+    <section class="tarjetas">
+      <a href="Libros.html" class="tarjeta"><span class="ico"><i class="fas fa-book"></i></span><span class="texto">Libros</span></a>
+      <a href="Prestamos.html" class="tarjeta"><span class="ico"><i class="fas fa-hourglass-half"></i></span><span class="texto">Préstamos</span></a>
+      <a href="Estudiantes.html" class="tarjeta"><span class="ico"><i class="fas fa-user-graduate"></i></span><span class="texto">Estudiantes</span></a>
+      <a href="Reportes.html" class="tarjeta"><span class="ico"><i class="fas fa-chart-line"></i></span><span class="texto">Reportes</span></a>
+    </section>
+
+    <!-- Sistema de Filtrado y Visualización de Libros -->
+    <section class="panel">
+      <h2 class="panel-titulo">Catálogo de Libros</h2>
+      
+      <!-- Filtros -->
+      <div class="filtros-caja">
+        <div class="filtro-grupo">
+          <label for="filtroCampo">Filtrar por:</label>
+          <select id="filtroCampo" class="filtro-select">
+            <option value="materia">Materia</option>
+            <option value="autor">Autor</option>
+            <option value="editorial">Editorial</option>
+          </select>
+        </div>
+        
+        <div class="filtro-grupo">
+          <label for="filtroOperador">Es igual a:</label>
+          <select id="filtroOperador" class="filtro-select">
+            <option value="igual">Igual a</option>
+            <option value="contiene">Contiene</option>
+          </select>
+        </div>
+        
+        <div class="filtro-grupo">
+          <label for="filtroValor">Valor:</label>
+          <input type="text" id="filtroValor" class="filtro-input" placeholder="Escribe para filtrar...">
+        </div>
+        
+        <button id="btnAplicarFiltro" class="btn-filtrar">
+          <i class="fas fa-filter"></i> Aplicar Filtro
+        </button>
+        
+        <button id="btnLimpiarFiltro" class="btn-limpiar">
+          <i class="fas fa-times"></i> Limpiar
+        </button>
+      </div>
+
+      <!-- Resultados -->
+      <div class="resultados-caja">
+        <div class="libros-grid" id="librosGrid">
+          <!-- Los libros se cargarán aquí dinámicamente -->
+          <div class="libro-vacio">
+            <i class="fas fa-book-open"></i>
+            <p>Usa los filtros para buscar libros</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para Cambio de Clave -->
+  <div id="changePasswordModal" class="modal">
+    <div class="modal-content">
+      <h2>Cambio de Clave</h2>
+      <form class="formulario">
+        <label for="currentPassword">Contraseña actual</label>
+        <input type="password" id="currentPassword" name="currentPassword" placeholder="Ingresa tu contraseña actual" required>
+
+        <label for="newPassword">Nueva contraseña</label>
+        <input type="password" id="newPassword" name="newPassword" placeholder="Ingresa la nueva contraseña" required>
+
+        <label for="confirmPassword">Confirmar nueva contraseña</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirma la nueva contraseña" required>
+
+        <button type="submit">Aceptar</button>
+        <button type="button" onclick="closeModal()">Regresar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Función para abrir el modal
+    function openModal() {
+      document.getElementById("changePasswordModal").style.display = "block";
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+      document.getElementById("changePasswordModal").style.display = "none";
+    }
+
+    // Cerrar el modal si el usuario hace click fuera de él
+    window.onclick = function(event) {
+      if (event.target == document.getElementById("changePasswordModal")) {
+        closeModal();
+      }
+    }
+
+    // JavaScript para el sistema de libros
+    document.addEventListener('DOMContentLoaded', function() {
+      const btnAplicarFiltro = document.getElementById('btnAplicarFiltro');
+      const btnLimpiarFiltro = document.getElementById('btnLimpiarFiltro');
+      const librosGrid = document.getElementById('librosGrid');
+
+      // Solo un libro de ejemplo para presentación
+      const librosEjemplo = [
+        {
+          id: 1,
+          titulo: "Cien años de soledad",
+          isbn: "978-8437604947",
+          imagen: "Imágenes/libro1.jpg",
+          descripcion: "Una novela del realismo mágico que cuenta la historia de la familia Buendía en Macondo.",
+          cantidad: 5,
+          materia: "Literatura",
+          autor: "Gabriel García Márquez",
+          editorial: "Sudamericana"
+        }
+      ];
+
+      // Función para mostrar libros
+      function mostrarLibros(libros) {
+        if (libros.length === 0) {
+          librosGrid.innerHTML = `
+            <div class="libro-vacio">
+              <i class="fas fa-search"></i>
+              <p>No se encontraron libros con los filtros aplicados</p>
+            </div>
+          `;
+          return;
+        }
+
+        librosGrid.innerHTML = libros.map(libro => `
+          <div class="libro-card">
+            <div class="libro-imagen">
+              <img src="${libro.imagen}" alt="${libro.titulo}" onerror="this.src='Imágenes/libro-default.jpg'">
+            </div>
+            <div class="libro-info">
+              <h3 class="libro-titulo">${libro.titulo}</h3>
+              <p class="libro-isbn"><strong>ISBN:</strong> ${libro.isbn}</p>
+              <p class="libro-descripcion">${libro.descripcion}</p>
+              <div class="libro-detalles">
+                <span class="libro-cantidad ${libro.cantidad > 0 ? 'disponible' : 'agotado'}">
+                  <i class="fas ${libro.cantidad > 0 ? 'fa-check' : 'fa-times'}"></i>
+                  ${libro.cantidad} disponible(s)
+                </span>
+              </div>
+              <div class="libro-metadata">
+                <span><strong>Materia:</strong> ${libro.materia}</span>
+                <span><strong>Autor:</strong> ${libro.autor}</span>
+                <span><strong>Editorial:</strong> ${libro.editorial}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Función para aplicar filtros
+      function aplicarFiltros() {
+        const campo = document.getElementById('filtroCampo').value;
+        const operador = document.getElementById('filtroOperador').value;
+        const valor = document.getElementById('filtroValor').value.toLowerCase().trim();
+
+        if (!valor) {
+          mostrarLibros(librosEjemplo);
+          return;
+        }
+
+        const librosFiltrados = librosEjemplo.filter(libro => {
+          const valorCampo = libro[campo].toLowerCase();
+          
+          if (operador === 'igual') {
+            return valorCampo === valor;
+          } else { // contiene
+            return valorCampo.includes(valor);
+          }
+        });
+
+        mostrarLibros(librosFiltrados);
+      }
+
+      // Función para limpiar filtros
+      function limpiarFiltros() {
+        document.getElementById('filtroValor').value = '';
+        document.getElementById('filtroCampo').selectedIndex = 0;
+        document.getElementById('filtroOperador').selectedIndex = 0;
+        mostrarLibros(librosEjemplo);
+      }
+
+      // Event listeners
+      btnAplicarFiltro.addEventListener('click', aplicarFiltros);
+      btnLimpiarFiltro.addEventListener('click', limpiarFiltros);
+
+      // También filtrar al presionar Enter en el input
+      document.getElementById('filtroValor').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          aplicarFiltros();
+        }
+      });
+
+      // Mostrar libros al cargar la página
+      mostrarLibros(librosEjemplo);
+    });
+  </script>
+</body>
+</html>

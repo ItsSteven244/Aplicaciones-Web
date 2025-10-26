@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Préstamos - Biblioteca</title>
+
+  <!-- Estilos base del menú -->
+  <link rel="stylesheet" href="css/Menu.css">
+  <!-- Estilos propios de Préstamos -->
+  <link rel="stylesheet" href="css/Prestamos.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <aside class="menu" aria-label="Menú lateral">
+    <div class="menu-superior">
+      <div class="usuario-caja">
+        <div class="avatar">
+          <img src="Imágenes/User.png" alt="Usuario">
+        </div>
+        <div>
+          <p class="nombre">Steven Soledispa</p>
+          <p class="rol">admin</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="opciones">
+      <a href="Menu.html" class="opcion"><i class="fas fa-home"></i> Inicio</a>
+      <a href="Libros.html" class="opcion"><i class="fas fa-book"></i> Libros</a>
+      <a href="Prestamos.html" class="opcion"><i class="fas fa-hourglass-half"></i> Préstamos</a>
+      <a href="Estudiantes.html" class="opcion"><i class="fas fa-user-graduate"></i> Estudiantes</a>
+      <a href="Reportes.html" class="opcion"><i class="fas fa-chart-line"></i> Reportes</a>
+      <div class="submenu">
+        <a href="javascript:void(0);" class="opcion" onclick="toggleSubmenu()">
+          <i class="fas fa-cogs"></i> Administración <i class="fas fa-chevron-down flecha-abajo"></i>
+        </a>
+        <ul class="subopciones">
+          <li><a href="Usuarios.html"><i class="fas fa-users"></i> Usuarios</a></li>
+          <li><a href="javascript:void(0);" onclick="openChangePasswordModal()"><i class="fas fa-key"></i> Cambio de clave</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="contenido">
+    <h1 class="titulo">Préstamos</h1>
+
+    <section class="card" aria-labelledby="titulo-seccion">
+      <div class="card-top">
+        <button id="btnAdd" class="btn btn-add" title="Registrar préstamo" aria-label="Registrar préstamo">＋</button>
+
+        <div class="right-tools">
+          <label for="pageSize">Mostrar</label>
+          <select id="pageSize" aria-label="Cantidad de entradas por página">
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+          </select>
+          <span>entradas</span>
+
+          <label class="search" for="searchInput">Buscar:</label>
+          <input id="searchInput" type="text" placeholder="Libro o estudiante" aria-label="Buscar préstamo">
+        </div>
+      </div>
+
+      <div class="tabla-wrapper">
+        <table id="tablaPrestamos" class="tabla" aria-describedby="infoPag">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Libro</th>
+              <th>Estudiante</th>
+              <th>Fecha Préstamo</th>
+              <th>Fecha Devolución</th>
+              <th>Cantidad</th>
+              <th>Observación</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody><!-- filas generadas desde JS --></tbody>
+        </table>
+      </div>
+
+      <div class="card-bottom">
+        <p id="infoPag" class="resumen">Mostrando 0 a 0 de 0 entradas</p>
+
+        <div class="paginacion" aria-label="Paginación">
+          <button id="prevBtn" class="btn small" type="button">Anterior</button>
+          <span id="pageIndicator" class="page-ind" aria-live="polite">1</span>
+          <button id="nextBtn" class="btn small" type="button">Siguiente</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal: Prestar Libro -->
+  <div id="addPrestamoModal" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="modalTituloPrestamo">
+    <div class="modal-content">
+      <h3 id="modalTituloPrestamo">Prestar Libro</h3>
+
+      <form id="formPrestamo" autocomplete="off" novalidate>
+        <div class="grid-3">
+          <!-- Libro como combobox -->
+          <label>Libro
+            <div class="combo" role="combobox" aria-expanded="false" aria-owns="listaLibros">
+              <input id="inputLibro" name="libro" placeholder="Buscar Libro">
+              <div id="dropdownLibro" class="dropdown" role="listbox" aria-label="Sugerencias de libros" hidden>
+                <div class="hint">Ingrese 2 o más caracteres</div>
+              </div>
+            </div>
+          </label>
+
+          <!-- Estudiante como combobox -->
+          <label>Estudiante
+            <div class="combo" role="combobox" aria-expanded="false" aria-owns="listaSugerencias">
+              <input id="inputEstudiante" name="estudiante" placeholder="Buscar Estudiante">
+              <div id="dropdownEst" class="dropdown" role="listbox" aria-label="Sugerencias de estudiantes" hidden>
+                <div class="hint">Ingrese 2 o más caracteres</div>
+              </div>
+            </div>
+          </label>
+
+          <label>Cant
+            <input name="cantidad" type="number" min="1" value="1">
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label>Fecha Préstamo
+            <input type="date" name="fechaPrestamo" id="fechaPrestamo">
+          </label>
+          <label>Fecha Devolución
+            <input type="date" name="fechaDevolucion" id="fechaDevolucion">
+          </label>
+        </div>
+
+        <div class="campo-observacion">
+          <label for="observacion">Observación</label>
+          <textarea id="observacion" name="observacion" rows="3" placeholder="Escriba una observación..."></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="cancelar" class="btn outline">Atrás</button>
+          <button type="submit" class="btn">Prestar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para Cambio de Clave -->
+  <div id="changePasswordModal" class="modal oculto">
+    <div class="modal-content">
+      <h2>Cambio de Clave</h2>
+      <form class="formulario">
+        <label for="currentPassword">Contraseña actual</label>
+        <input type="password" id="currentPassword" name="currentPassword" placeholder="Ingresa tu contraseña actual" required>
+
+        <label for="newPassword">Nueva contraseña</label>
+        <input type="password" id="newPassword" name="newPassword" placeholder="Ingresa la nueva contraseña" required>
+
+        <label for="confirmPassword">Confirmar nueva contraseña</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirma la nueva contraseña" required>
+
+        <button type="submit">Aceptar</button>
+        <button type="button" onclick="closeChangePasswordModal()">Regresar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/prestamos.js"></script>
+</body>
+</html>

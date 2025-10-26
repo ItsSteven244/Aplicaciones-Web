@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Usuarios - Biblioteca</title>
+
+  <!-- Estilos base del menú -->
+  <link rel="stylesheet" href="css/Menu.css">
+  <!-- Estilos propios de usuarios -->
+  <link rel="stylesheet" href="css/Usuarios.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <aside class="menu" aria-label="Menú lateral">
+    <div class="menu-superior">
+      <div class="usuario-caja">
+        <div class="avatar">
+          <img src="Imágenes/User.png" alt="Usuario">
+        </div>
+        <div>
+          <p class="nombre">Steven Soledispa</p>
+          <p class="rol">admin</p>
+        </div>
+      </div>
+    </div>
+
+    <nav class="opciones">
+      <a href="Menu.html" class="opcion"><i class="fas fa-home"></i> Inicio</a>
+      <a href="Libros.html" class="opcion"><i class="fas fa-book"></i> Libros</a>
+      <a href="Prestamos.html" class="opcion"><i class="fas fa-hourglass-half"></i> Préstamos</a>
+      <a href="Estudiantes.html" class="opcion"><i class="fas fa-user-graduate"></i> Estudiantes</a>
+      <a href="Reportes.html" class="opcion"><i class="fas fa-chart-line"></i> Reportes</a>
+      <div class="submenu">
+        <a href="javascript:void(0);" class="opcion" onclick="toggleSubmenu()">
+          <i class="fas fa-cogs"></i> Administración <i class="fas fa-chevron-down flecha-abajo"></i>
+        </a>
+        <ul class="subopciones">
+          <li><a href="Usuarios.html"><i class="fas fa-users"></i> Usuarios</a></li>
+          <li><a href="javascript:void(0);" onclick="openChangePasswordModal()"><i class="fas fa-key"></i> Cambio de clave</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h1 class="titulo">Usuarios</h1>
+
+    <section class="card" aria-labelledby="titulo-seccion">
+      <div class="card-top">
+        <button id="btnAdd" class="btn btn-add" title="Agregar usuario" aria-label="Agregar usuario">＋</button>
+
+        <div class="right-tools">
+          <label for="pageSize">Mostrar</label>
+          <select id="pageSize" aria-label="Cantidad de entradas por página">
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+          </select>
+          <span>entradas</span>
+
+          <label class="search" for="searchInput">Buscar:</label>
+          <input id="searchInput" type="text" placeholder="Correo, Nombre o Id" aria-label="Buscar usuario">
+        </div>
+      </div>
+
+      <div class="tabla-wrapper">
+        <table id="tablaUsuarios" class="tabla" aria-describedby="infoPag">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Estado</th>
+              <th>Tipo de usuario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody><!-- filas generadas desde JS --></tbody>
+        </table>
+      </div>
+
+      <div class="card-bottom">
+        <p id="infoPag" class="resumen">Mostrando 0 a 0 de 0 entradas</p>
+
+        <div class="paginacion" aria-label="Paginación">
+          <button id="prevBtn" class="btn small" type="button">Anterior</button>
+          <span id="pageIndicator" class="page-ind" aria-live="polite">1</span>
+          <button id="nextBtn" class="btn small" type="button">Siguiente</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Agregar/Editar Usuario -->
+  <div id="modalUsuario" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="modalTituloUsuario">
+    <div class="modal-content">
+      <h3 id="modalTituloUsuario">Nuevo Usuario</h3>
+
+      <form id="formUsuario" novalidate>
+        <div class="grid-2">
+          <label for="usuario">Usuario
+            <input id="usuario" name="usuario" required autocomplete="off">
+          </label>
+          <label for="nombre">Nombre
+            <input id="nombre" name="nombre" required autocomplete="off">
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label for="contrasena">Contraseña
+            <input id="contrasena" name="contrasena" type="password" required autocomplete="off">
+          </label>
+          <label for="confirmarContrasena">Confirmar Contraseña
+            <input id="confirmarContrasena" name="confirmarContrasena" type="password" required autocomplete="off">
+          </label>
+        </div>
+
+        <!-- NUEVO: Select de roles -->
+        <div class="grid-2">
+          <label for="rol">Rol
+            <select id="rol" name="rol" required>
+              <option value="Estudiante">Estudiante</option>
+              <option value="Bibliotecario">Bibliotecario</option>
+              <option value="Admin">Admin</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="cancelarUsuario" class="btn outline">Cancelar</button>
+          <button type="submit" class="btn">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para Cambio de Clave -->
+<div id="modalCambioClave" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="modalTituloClave">
+    <div class="modal-content">
+        <h3 id="modalTituloClave">Cambio de Clave</h3>
+        <form id="formCambioClave" class="formulario" novalidate>
+            <label for="currentPassword">Contraseña actual</label>
+            <input type="password" id="currentPassword" name="currentPassword" placeholder="Ingresa tu contraseña actual" required>
+
+            <label for="newPassword">Nueva contraseña</label>
+            <input type="password" id="newPassword" name="newPassword" placeholder="Ingresa la nueva contraseña" required>
+
+            <label for="confirmPassword">Confirmar nueva contraseña</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirma la nueva contraseña" required>
+
+            <div class="modal-actions">
+                <button type="button" id="cancelarClave" class="btn outline">Regresar</button>
+                <button type="submit" class="btn">Aceptar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+  <script src="js/usuarios.js"></script>
+</body>
+</html>

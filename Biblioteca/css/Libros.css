@@ -1,0 +1,120 @@
+/* ===== Base ===== */
+*{ box-sizing:border-box }
+html,body{ margin:0; padding:0; height:100%; font-family:'Poppins',sans-serif; background:#f5f7fb; color:#222 }
+
+/* ===== Contenido ===== */
+.contenido{ margin-left:240px; padding:20px }
+.titulo{ margin:6px 0 16px; font-size:22px }
+
+/* ===== Card contenedora ===== */
+.card{ background:#fff; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,.06); padding:16px }
+.card-top{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:14px }
+
+/* Herramientas derechas (Mostrar / Buscar) */
+.right-tools{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;         
+}
+#pageSize, #searchInput{
+  padding:6px 8px; border:1px solid #d1d5db; border-radius:8px; outline:none; background:#fff
+}
+
+/* ===== Botones ===== */
+.btn{ border:none; padding:8px 12px; border-radius:10px; cursor:pointer; background:#e5e7eb }
+.btn:hover{ filter:brightness(.95) }
+.btn.small{ padding:6px 10px; font-size:14px }
+.btn-add{ background:#0ea5a5; color:#fff; font-weight:700; width:42px; height:42px; border-radius:10px }
+
+/* ===== Tabla ===== */
+.tabla-wrapper{ overflow:auto; border:1px solid #e5e7eb; border-radius:10px }
+.tabla{ width:100%; border-collapse:collapse; min-width:1000px }
+.tabla thead th{
+  background:#1f2937; color:#e5e7eb; text-align:left; padding:10px; font-size:14px; position:sticky; top:0; z-index:1;
+}
+.tabla tbody td{ padding:10px; border-top:1px solid #e5e7eb; font-size:14px }
+.acciones{ display:flex; gap:8px }
+.badge{ padding:4px 8px; border-radius:999px; font-size:12px; font-weight:600; display:inline-block }
+.badge.disponible{ background:#d1fae5; color:#065f46 }
+.badge.prestado{ background:#fee2e2; color:#991b1b }
+
+/* ===== Paginación y resumen ===== */
+.card-bottom{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap }
+.paginacion{ display:flex; align-items:center; gap:10px }
+.resumen{ font-size:13px; color:#555 }
+
+/* ===== Modal ===== */
+.modal{ position:fixed; inset:0; background:#00000055; display:grid; place-items:center; padding:16px; z-index:1000 }
+.modal.oculto{ display:none }
+.modal-content{ background:#fff; width:100%; max-width:760px; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.25) }
+.modal-content h3{ margin:0; padding:14px 18px; background:#0f8c8c; color:#fff; font-size:18px }
+#formLibro{ padding:16px }
+.grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin:10px 0 }
+.grid-2 label{ display:flex; flex-direction:column; gap:6px; font-size:14px }
+.grid-2 input, .grid-2 select{ padding:10px; border:1px solid #d1d5db; border-radius:8px }
+.modal-actions{ display:flex; justify-content:flex-end; gap:10px; margin-top:12px }
+.modal-actions .btn{ background:#0f8c8c; color:#fff; font-weight:600 }
+.modal-actions .btn.outline{ background:#e11d48; color:#fff }
+
+/* ===== Sección de carga de logo ===== */
+.logo-upload-section {
+  margin-top: 10px;
+}
+
+.logo-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 14px;
+}
+
+.logo-preview {
+  width: 120px;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.logo-preview:hover {
+  border-color: #0f8c8c;
+}
+
+.logo-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  display: none;
+}
+
+.logo-placeholder {
+  color: #888;
+  font-size: 12px;
+  text-align: center;
+  padding: 10px;
+}
+
+.logo-preview.active {
+  border-color: #0f8c8c;
+  border-style: solid;
+}
+
+.file-input {
+  display: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 700px){
+  .contenido{ margin-left:0 }
+  .grid-2{ grid-template-columns:1fr }
+  .logo-preview {
+    width: 100px;
+    height: 100px;
+  }
+}

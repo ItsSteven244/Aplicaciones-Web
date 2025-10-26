@@ -1,0 +1,102 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.EstiloVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+
+/* Cuadro */
+.cuadro {
+    background-color: rgb(255, 255, 255); /* Fondo blanco */
+    width: 400px; /* Ancho del cuadro */
+    height: 100vh; /* 100% del alto del cuadro */
+    margin: 0;   /* Elimina el margen automático */
+    padding: 20px;  /* Espacio interno alrededor del texto */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra sutil alrededor del cuadro */
+    position: absolute;  /* Permite mover el cuadro en cualquier parte de la pantalla */
+    top: 0;  /* Alinea el cuadro en la parte superior */
+    right: 0;  /* Alinea el cuadro a la derecha */
+}
+
+/* Titulo */
+.Titulo {
+    position: absolute;
+    bottom: 90px; /* Mueve el título hacia arriba desde el borde inferior */
+    font-family: 'Poppins', sans-serif; /* Fuente */
+    font-size: 2em; /* Tamaño de fuente más grande para el título */
+    color: #d8d6d6; /* Color del texto */
+    margin: 0;
+}
+
+/* Párrafo */
+.Parrafo {
+    position: absolute;
+    bottom: 30px; /* Mueve el párrafo un poco más cerca del borde inferior */
+    font-family: 'Poppins', sans-serif; /* Fuente */
+    font-size: 1.2em; /* Tamaño de fuente más pequeño para el párrafo */
+    color: #d8d6d6; /* Color del texto */
+    margin: 0;
+}
+
+
+/* Fuente importada desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+
+/* Estilo para la imagen */
+.logo {
+    width: 80%;  /* Ajusta el tamaño de la imagen al 80% del ancho del cuadro */
+    height: auto; /* Mantiene la proporción de la imagen */
+    object-fit: contain; /* Ajusta la imagen sin deformarla */
+    display: block; /* Necesario para poder centrar la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+/* Confi. del campo de texto */
+.campo {
+    width: 80%;  /* El campo ocupará el 80% del ancho del cuadro */
+    margin: 20px auto; /* 🔹 Esto centra horizontalmente el input */
+    height: 40px;
+    font-size: 1em;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #000000; /* Borde negro */
+    padding: 10px; /* Espaciado interno */
+    box-sizing: border-box; /* Evita que el padding altere el ancho total */
+    display: block; /* Necesario para que el margin:auto funcione */
+}
+
+
+/*Centrar solo el botón de envío*/
+.botónIS {
+    display: block;  /* Hace que el botón sea un bloque */
+    margin: 0 auto;  /* Centra el botón horizontalmente */
+    background-color: #0f8c8c; /* Color de fondo del botón */
+    color:rgb(255, 255, 255); /* Color del texto */
+    padding: 7px 100px; /* Espaciado dentro del botón (arriba/abajo, izquierda/derecha), PD: aumenta el tamaño */
+    font-size: 1.1em; /* Tamaño del texto */
+    cursor: pointer; /* Esto es un detalle, cambia el cursor al pasar sobre el botón */
+}
+
+
+.Parrafo2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.7em;
+    color: #413f3f;
+    text-align: center; /* Centra el texto */
+    margin-top: 30px; /* Lo separa del borde inferior */
+}
+
+
+
+

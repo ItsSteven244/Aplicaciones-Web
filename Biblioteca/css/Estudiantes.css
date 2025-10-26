@@ -1,0 +1,204 @@
+/* ===== Base ===== */
+*{ box-sizing:border-box }
+html,body{ margin:0; padding:0; height:100%; font-family:'Poppins',sans-serif; background:#f5f7fb; color:#222 }
+
+/* ===== Lateral ===== */
+.menu{ width:240px; min-height:100vh; background:#111827; color:#e5e7eb; position:fixed; left:0; top:0 }
+.menu-superior{ background:#0f8c8c; padding:16px }
+.usuario-caja{ display:flex; align-items:center; gap:12px }
+.avatar{ width:45px; height:45px; border-radius:10px; overflow:hidden; background:#ffffff22; display:grid; place-items:center }
+.avatar img{ width:100%; height:100%; object-fit:cover }
+.nombre{ margin:0; font-weight:600; font-size:14px; color:#fff }
+.rol{ margin:0; color:#d1faf5; font-size:12px }
+.opciones{ display:flex; flex-direction:column; gap:8px; padding:16px }
+.opcion{ display:block; padding:10px 12px; border-radius:10px; color:#e5e7eb; text-decoration:none }
+.opcion:hover, .opcion.activo{ background:#1f2937 }
+
+/* ===== Contenido ===== */
+.contenido{ margin-left:240px; padding:20px }
+.titulo{ margin:6px 0 16px; font-size:22px }
+
+/* ===== Card contenedora ===== */
+.card{ background:#fff; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,.06); padding:16px }
+.card-top{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:14px }
+.right-tools{ display:flex; align-items:center; gap:10px; flex-wrap:wrap }
+
+/* ===== Botones ===== */
+.btn{ border:none; padding:8px 12px; border-radius:10px; cursor:pointer; background:#e5e7eb }
+.btn:hover{ filter:brightness(.95) }
+.btn.small{ padding:6px 10px; font-size:14px }
+.btn-add{ background:#0ea5a5; color:#fff; font-weight:700; width:42px; height:42px; border-radius:10px }
+
+/* ===== Controles ===== */
+#pageSize, #searchInput{
+  padding:6px 8px; border:1px solid #d1d5db; border-radius:8px; outline:none; background:#fff
+}
+
+/* ===== Tabla ===== */
+.tabla-wrapper{ overflow:auto; border:1px solid #e5e7eb; border-radius:10px }
+.tabla{ width:100%; border-collapse:collapse; min-width:900px }
+.tabla thead th{
+  background:#1f2937; color:#e5e7eb; text-align:left; padding:10px; font-size:14px; position:sticky; top:0; z-index:1;
+}
+.tabla tbody td{ padding:10px; border-top:1px solid #e5e7eb; font-size:14px }
+.acciones{ display:flex; gap:8px }
+.badge{ padding:4px 8px; border-radius:999px; font-size:12px; font-weight:600; display:inline-block }
+.badge.activo{ background:#d1fae5; color:#065f46 }
+.badge.inactivo{ background:#fee2e2; color:#991b1b }
+
+/* ===== Paginación y resumen ===== */
+.card-bottom{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap }
+.paginacion{ display:flex; align-items:center; gap:10px }
+.resumen{ font-size:13px; color:#555 }
+
+/* ===== MODAL UNIFICADO ===== */
+.modal{ 
+  position:fixed; 
+  inset:0; 
+  background:#00000055; 
+  display:grid; 
+  place-items:center; 
+  padding:16px; 
+  z-index:1000;
+}
+.modal.oculto{ 
+  display:none !important; 
+}
+.modal-content{ 
+  background:#fff; 
+  width:100%; 
+  max-width:760px; 
+  border-radius:12px; 
+  overflow:hidden; 
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* Estilos específicos para el modal de estudiantes */
+#modalEstudiante .modal-content {
+  max-width: 760px;
+}
+
+#modalEstudiante h3{ 
+  margin:0; 
+  padding:14px 18px; 
+  background:#0f8c8c; 
+  color:#fff; 
+  font-size:18px;
+  text-align: center;
+}
+#formEst{ 
+  padding:16px; 
+}
+.grid-2{ 
+  display:grid; 
+  grid-template-columns:repeat(2,1fr); 
+  gap:12px; 
+  margin:10px 0;
+}
+.grid-2 label{ 
+  display:flex; 
+  flex-direction:column; 
+  gap:6px; 
+  font-size:14px;
+}
+.grid-2 input, .grid-2 select{ 
+  padding:10px; 
+  border:1px solid #d1d5db; 
+  border-radius:8px;
+}
+.modal-actions{ 
+  display:flex; 
+  justify-content:flex-end; 
+  gap:10px; 
+  margin-top:12px;
+}
+.modal-actions .btn{ 
+  background:#0f8c8c; 
+  color:#fff; 
+  font-weight:600;
+}
+.modal-actions .btn.outline{ 
+  background:#e11d48; 
+  color:#fff;
+}
+
+/* Estilos específicos para el modal de cambio de clave */
+#modalCambioClave .modal-content {
+  max-width: 500px;
+}
+
+#modalCambioClave h2 {
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #0f8c8c;
+  padding: 15px 10px;
+  margin: 0;
+  border-radius: 0;
+}
+
+#modalCambioClave .formulario {
+  padding: 20px;
+  margin: 0;
+}
+
+#modalCambioClave .formulario label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+#modalCambioClave .formulario input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+#modalCambioClave .formulario button {
+  background-color: #0f8c8c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+#modalCambioClave .formulario button:hover {
+  background-color: #0d7a7a;
+}
+
+#modalCambioClave .formulario button[type="button"] {
+  background-color: #e11d48;
+}
+
+#modalCambioClave .formulario button[type="button"]:hover {
+  background-color: #c81e3d;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 700px){
+  .contenido{ margin-left:0 }
+  .menu{ position:static; width:100% }
+  .grid-2{ grid-template-columns:1fr }
+  
+  /* Modales responsive */
+  .modal-content {
+    margin: 5% auto;
+    width: 95%;
+  }
+  
+  #modalEstudiante .modal-content,
+  #modalCambioClave .modal-content {
+    width: 95%;
+  }
+}

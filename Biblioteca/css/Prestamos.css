@@ -1,0 +1,249 @@
+/* ===== Base ===== */
+*{ box-sizing:border-box }
+html,body{ margin:0; padding:0; height:100%; font-family:'Poppins',sans-serif; background:#f5f7fb; color:#222 }
+
+/* ===== Contenido ===== */
+.contenido{ margin-left:240px; padding:20px }
+.titulo{ margin:6px 0 16px; font-size:22px }
+
+/* ===== Card contenedora ===== */
+.card{ background:#fff; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,.06); padding:16px }
+.card-top{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:14px }
+
+/* Herramientas derechas (Mostrar / Buscar) */
+.right-tools{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+#pageSize, #searchInput{
+  padding:6px 8px; border:1px solid #d1d5db; border-radius:8px; outline:none; background:#fff
+}
+
+/* ===== Botones ===== */
+.btn{ border:none; padding:8px 12px; border-radius:10px; cursor:pointer; background:#e5e7eb }
+.btn:hover{ filter:brightness(.95) }
+.btn.small{ padding:6px 10px; font-size:14px }
+.btn-add{ background:#0ea5a5; color:#fff; font-weight:700; width:42px; height:42px; border-radius:10px }
+
+/* ===== Tabla ===== */
+.tabla-wrapper{ overflow:auto; border:1px solid #e5e7eb; border-radius:10px }
+.tabla{ width:100%; border-collapse:collapse; min-width:1000px }
+.tabla thead th{
+  background:#1f2937; color:#e5e7eb; text-align:left; padding:10px; font-size:14px; position:sticky; top:0; z-index:1;
+}
+.tabla tbody td{ padding:10px; border-top:1px solid #e5e7eb; font-size:14px }
+.acciones{ display:flex; gap:8px }
+.badge{ padding:4px 8px; border-radius:999px; font-size:12px; font-weight:600; display:inline-block }
+.badge.entregado{ background:#d1fae5; color:#065f46 }  /* Devuelto/Entregado */
+.badge.pendiente{ background:#fee2e2; color:#991b1b }  /* Pendiente de devolución */
+
+/* ===== Paginación y resumen ===== */
+.card-bottom{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap }
+.paginacion{ display:flex; align-items:center; gap:10px }
+.resumen{ font-size:13px; color:#555 }
+
+/* ===== Modal ===== */
+.modal{ 
+  position:fixed; 
+  inset:0; 
+  background:#00000055; 
+  display:grid; 
+  place-items:center; 
+  padding:16px; 
+  z-index:1000 
+}
+.modal.oculto{ 
+  display:none !important; 
+}
+.modal-content{ 
+  background:#fff; 
+  width:100%; 
+  max-width:760px; 
+  border-radius:12px; 
+  overflow:hidden; 
+  box-shadow:0 10px 30px rgba(0,0,0,.25) 
+}
+.modal-content h3{ 
+  margin:0; 
+  padding:14px 18px; 
+  background:#0f8c8c; 
+  color:#fff; 
+  font-size:18px 
+}
+#formPrestamo{ 
+  padding:16px; 
+  display:flex; 
+  flex-direction:column; 
+  gap:12px 
+}
+.grid-2{ 
+  display:grid; 
+  grid-template-columns:repeat(2,1fr); 
+  gap:12px 
+}
+.grid-3{ 
+  display:grid; 
+  grid-template-columns:2fr 3fr 1fr; 
+  gap:12px 
+}
+.grid-2 label, .grid-3 label{ 
+  display:flex; 
+  flex-direction:column; 
+  gap:6px; 
+  font-size:14px 
+}
+.grid-2 input, .grid-3 input, .grid-3 select, textarea, .grid-2 select{
+  padding:10px; 
+  border:1px solid #d1d5db; 
+  border-radius:8px; 
+  resize:vertical;
+}
+.modal-actions{ 
+  display:flex; 
+  justify-content:flex-end; 
+  gap:10px; 
+  margin-top:6px 
+}
+.modal-actions .btn{ 
+  background:#0f8c8c; 
+  color:#fff; 
+  font-weight:600 
+}
+.modal-actions .btn.outline{ 
+  background:#e11d48; 
+  color:#fff 
+}
+
+/* Combobox simulado */
+.combo{ 
+  position:relative 
+}
+.dropdown{
+  position:absolute; 
+  left:0; 
+  right:0; 
+  top:calc(100% + 4px);
+  background:#fff; 
+  border:1px solid #d1d5db; 
+  border-radius:8px; 
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  max-height:220px; 
+  overflow:auto; 
+  z-index:5; 
+  padding:6px;
+}
+.dropdown .hint{ 
+  font-size:12px; 
+  color:#666; 
+  padding:6px 
+}
+.dropdown .item{ 
+  padding:8px; 
+  border-radius:6px; 
+  cursor:pointer 
+}
+.dropdown .item:hover{ 
+  background:#f3f4f6 
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px){
+  .grid-3{ grid-template-columns:1fr }
+}
+@media (max-width: 700px){
+  .contenido{ margin-left:0 }
+  .grid-2{ grid-template-columns:1fr }
+}
+
+/* ===== Observación ===== */
+.campo-observacion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.campo-observacion textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.2s ease;
+}
+
+.campo-observacion textarea:focus {
+  outline: none;
+  border-color: #0f8c8c;
+}
+
+/* Modal para Cambio de Clave - Estilos específicos */
+#changePasswordModal .modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 0;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  overflow: hidden;
+}
+
+#changePasswordModal h2 {
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #0f8c8c;
+  padding: 15px 10px;
+  margin: 0;
+  border-radius: 0;
+}
+
+#changePasswordModal .formulario {
+  padding: 20px;
+  margin: 0;
+}
+
+#changePasswordModal .formulario label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+#changePasswordModal .formulario input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+#changePasswordModal .formulario button {
+  background-color: #0f8c8c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+#changePasswordModal .formulario button:hover {
+  background-color: #0d7a7a;
+}
+
+#changePasswordModal .formulario button[type="button"] {
+  background-color: #e11d48;
+}
+
+#changePasswordModal .formulario button[type="button"]:hover {
+  background-color: #c81e3d;
+}
