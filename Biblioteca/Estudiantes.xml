@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<estudiantes>
+  <estudiante>
+    <codigo>01-01</codigo>
+    <dni>1234567890</dni>
+    <nombre>Alexis Soledispa</nombre>
+    <carrera>Informática</carrera>
+    <direccion>Av. Principal 123</direccion>
+    <telefono>0987654321</telefono>
+  </estudiante>
+  <estudiante>
+    <codigo>02-02</codigo>
+    <dni>0987654321</dni>
+    <nombre>María González</nombre>
+    <carrera>Matemáticas</carrera>
+    <direccion>Calle Secundaria 45</direccion>
+    <telefono>0991122334</telefono>
+  </estudiante>
+</estudiantes>

@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
   <!-- Menú lateral -->
   <aside class="menu">
     <div class="menu-superior">
@@ -24,7 +23,6 @@
         </div>
       </div>
     </div>
-
     <nav class="opciones">
       <a href="Menu.html" class="opcion"><i class="fas fa-home"></i> Inicio</a>
       <a href="Libros.html" class="opcion"><i class="fas fa-book"></i> Libros</a>
@@ -104,7 +102,7 @@
     </section>
   </main>
 
-  <!-- Modal para Cambio de Clave -->
+  <!-- Modal de Cambio de Clave -->
   <div id="changePasswordModal" class="modal">
     <div class="modal-content">
       <h2>Cambio de Clave</h2>
@@ -124,128 +122,6 @@
     </div>
   </div>
 
-  <script>
-    // Función para abrir el modal
-    function openModal() {
-      document.getElementById("changePasswordModal").style.display = "block";
-    }
-
-    // Función para cerrar el modal
-    function closeModal() {
-      document.getElementById("changePasswordModal").style.display = "none";
-    }
-
-    // Cerrar el modal si el usuario hace click fuera de él
-    window.onclick = function(event) {
-      if (event.target == document.getElementById("changePasswordModal")) {
-        closeModal();
-      }
-    }
-
-    // JavaScript para el sistema de libros
-    document.addEventListener('DOMContentLoaded', function() {
-      const btnAplicarFiltro = document.getElementById('btnAplicarFiltro');
-      const btnLimpiarFiltro = document.getElementById('btnLimpiarFiltro');
-      const librosGrid = document.getElementById('librosGrid');
-
-      // Solo un libro de ejemplo para presentación
-      const librosEjemplo = [
-        {
-          id: 1,
-          titulo: "Cien años de soledad",
-          isbn: "978-8437604947",
-          imagen: "Imágenes/libro1.jpg",
-          descripcion: "Una novela del realismo mágico que cuenta la historia de la familia Buendía en Macondo.",
-          cantidad: 5,
-          materia: "Literatura",
-          autor: "Gabriel García Márquez",
-          editorial: "Sudamericana"
-        }
-      ];
-
-      // Función para mostrar libros
-      function mostrarLibros(libros) {
-        if (libros.length === 0) {
-          librosGrid.innerHTML = `
-            <div class="libro-vacio">
-              <i class="fas fa-search"></i>
-              <p>No se encontraron libros con los filtros aplicados</p>
-            </div>
-          `;
-          return;
-        }
-
-        librosGrid.innerHTML = libros.map(libro => `
-          <div class="libro-card">
-            <div class="libro-imagen">
-              <img src="${libro.imagen}" alt="${libro.titulo}" onerror="this.src='Imágenes/libro-default.jpg'">
-            </div>
-            <div class="libro-info">
-              <h3 class="libro-titulo">${libro.titulo}</h3>
-              <p class="libro-isbn"><strong>ISBN:</strong> ${libro.isbn}</p>
-              <p class="libro-descripcion">${libro.descripcion}</p>
-              <div class="libro-detalles">
-                <span class="libro-cantidad ${libro.cantidad > 0 ? 'disponible' : 'agotado'}">
-                  <i class="fas ${libro.cantidad > 0 ? 'fa-check' : 'fa-times'}"></i>
-                  ${libro.cantidad} disponible(s)
-                </span>
-              </div>
-              <div class="libro-metadata">
-                <span><strong>Materia:</strong> ${libro.materia}</span>
-                <span><strong>Autor:</strong> ${libro.autor}</span>
-                <span><strong>Editorial:</strong> ${libro.editorial}</span>
-              </div>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      // Función para aplicar filtros
-      function aplicarFiltros() {
-        const campo = document.getElementById('filtroCampo').value;
-        const operador = document.getElementById('filtroOperador').value;
-        const valor = document.getElementById('filtroValor').value.toLowerCase().trim();
-
-        if (!valor) {
-          mostrarLibros(librosEjemplo);
-          return;
-        }
-
-        const librosFiltrados = librosEjemplo.filter(libro => {
-          const valorCampo = libro[campo].toLowerCase();
-          
-          if (operador === 'igual') {
-            return valorCampo === valor;
-          } else { // contiene
-            return valorCampo.includes(valor);
-          }
-        });
-
-        mostrarLibros(librosFiltrados);
-      }
-
-      // Función para limpiar filtros
-      function limpiarFiltros() {
-        document.getElementById('filtroValor').value = '';
-        document.getElementById('filtroCampo').selectedIndex = 0;
-        document.getElementById('filtroOperador').selectedIndex = 0;
-        mostrarLibros(librosEjemplo);
-      }
-
-      // Event listeners
-      btnAplicarFiltro.addEventListener('click', aplicarFiltros);
-      btnLimpiarFiltro.addEventListener('click', limpiarFiltros);
-
-      // También filtrar al presionar Enter en el input
-      document.getElementById('filtroValor').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          aplicarFiltros();
-        }
-      });
-
-      // Mostrar libros al cargar la página
-      mostrarLibros(librosEjemplo);
-    });
-  </script>
+  <script src="js/libros.js"></script>
 </body>
 </html>

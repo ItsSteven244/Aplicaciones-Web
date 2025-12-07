@@ -149,15 +149,6 @@ html,body{ margin:0; padding:0; height:100%; font-family:'Poppins',sans-serif; b
   background:#f3f4f6 
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 900px){
-  .grid-3{ grid-template-columns:1fr }
-}
-@media (max-width: 700px){
-  .contenido{ margin-left:0 }
-  .grid-2{ grid-template-columns:1fr }
-}
-
 /* ===== Observación ===== */
 .campo-observacion {
   display: flex;

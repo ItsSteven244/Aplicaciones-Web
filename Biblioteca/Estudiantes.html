@@ -15,6 +15,7 @@
 <body>
 
   <!-- Menú lateral -->
+  <!-- aside, Contenido secundario -->
   <aside class="menu" aria-label="Menú lateral">
     <div class="menu-superior">
       <div class="usuario-caja">
@@ -27,7 +28,7 @@
         </div>
       </div>
     </div>
-
+    <!-- nav para la navegación -->
     <nav class="opciones">
       <a href="Menu.html" class="opcion"><i class="fas fa-home"></i> Inicio</a>
       <a href="Libros.html" class="opcion"><i class="fas fa-book"></i> Libros</a>
@@ -46,7 +47,7 @@
     </nav>
   </aside>
 
-  <!-- Contenido -->
+  <!-- Contenido principal main, <a> enlaces -->
   <main class="contenido">
     <h1 class="titulo">Estudiantes</h1>
 
@@ -69,6 +70,8 @@
       </div>
 
       <div class="tabla-wrapper">
+        <!-- Table Representa toda la tabla, thead contiene las filas del encabeza de la tabla -->
+        <!-- tr representa una fila completa dentro de la tabla y th representa una celda de encabezado-->
         <table id="tablaEst" class="tabla" aria-describedby="infoPag">
           <thead>
             <tr>
@@ -81,7 +84,7 @@
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody><!-- filas generadas desde JS --></tbody>
+          <tbody><!-- filas generadas desde JS aqui pondriamos los datos --></tbody>
         </table>
       </div>
 

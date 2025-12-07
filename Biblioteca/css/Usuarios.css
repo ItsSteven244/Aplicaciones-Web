@@ -370,31 +370,3 @@ html, body {
   animation: fadeIn 0.3s ease-in;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 700px) {
-  .contenido {
-    margin-left: 0;
-  }
-
-  .menu {
-    position: static;
-    width: 100%;
-  }
-
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-  
-  #formUsuario .grid-2 {
-    grid-template-columns: 1fr;
-  }
-  
-  .modal-actions {
-    flex-direction: column;
-  }
-}

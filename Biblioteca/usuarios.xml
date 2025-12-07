@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<usuarios>
+  <usuario>
+    <id>U001</id>
+    <nombre>Steven Soledispa</nombre>
+    <correo>e1234567890@live.uleam.edu.ec</correo>
+    <estado>Activo</estado>
+    <rol>Admin</rol>
+  </usuario>
+  <usuario>
+    <id>U002</id>
+    <nombre>María González</nombre>
+    <correo>e0987654321@live.uleam.edu.ec</correo>
+    <estado>Inactivo</estado>
+    <rol>Estudiante</rol>
+  </usuario>
+</usuarios>

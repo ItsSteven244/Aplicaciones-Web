@@ -1,8 +1,8 @@
-html, body {
-    margin: 0;
-    padding: 0;
+html, body {  /* Se aplica a toda la pagina en general */
+    margin: 0;  /* Elimina los espacios en en blanco alrededor */ 
+    padding: 0;  /* Elimina los espacios en en blanco alrededor */ 
     height: 100%;
-    overflow: hidden;
+    overflow: hidden; /* Para no permitir el desplazamiento */ 
 }
 
 .EstiloVideo {
@@ -11,8 +11,8 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: -1;
+    object-fit: cover;  /* Hace que el video cubra todo el espacio sin deformarse */ 
+    z-index: -1;        /* El video envía al fondo detrás de todo */ 
 }
 
 
@@ -50,10 +50,6 @@ html, body {
 }
 
 
-/* Fuente importada desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-
 /* Estilo para la imagen */
 .logo {
     width: 80%;  /* Ajusta el tamaño de la imagen al 80% del ancho del cuadro */
@@ -89,6 +85,8 @@ html, body {
 }
 
 
+/* Fuente importada desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 .Parrafo2 {
     font-family: 'Poppins', sans-serif;
     font-size: 0.7em;

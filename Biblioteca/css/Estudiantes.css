@@ -30,16 +30,12 @@ html,body{ margin:0; padding:0; height:100%; font-family:'Poppins',sans-serif; b
 .btn-add{ background:#0ea5a5; color:#fff; font-weight:700; width:42px; height:42px; border-radius:10px }
 
 /* ===== Controles ===== */
-#pageSize, #searchInput{
-  padding:6px 8px; border:1px solid #d1d5db; border-radius:8px; outline:none; background:#fff
-}
+#pageSize, #searchInput{ padding:6px 8px; border:1px solid #d1d5db; border-radius:8px; outline:none; background:#fff }
 
 /* ===== Tabla ===== */
 .tabla-wrapper{ overflow:auto; border:1px solid #e5e7eb; border-radius:10px }
 .tabla{ width:100%; border-collapse:collapse; min-width:900px }
-.tabla thead th{
-  background:#1f2937; color:#e5e7eb; text-align:left; padding:10px; font-size:14px; position:sticky; top:0; z-index:1;
-}
+.tabla thead th{ background:#1f2937; color:#e5e7eb; text-align:left; padding:10px; font-size:14px; position:sticky; top:0; z-index:1 }
 .tabla tbody td{ padding:10px; border-top:1px solid #e5e7eb; font-size:14px }
 .acciones{ display:flex; gap:8px }
 .badge{ padding:4px 8px; border-radius:999px; font-size:12px; font-weight:600; display:inline-block }
@@ -61,9 +57,7 @@ html,body{ margin:0; padding:0; height:100%; font-family:'Poppins',sans-serif; b
   padding:16px; 
   z-index:1000;
 }
-.modal.oculto{ 
-  display:none !important; 
-}
+.modal.oculto{ display:none !important }
 .modal-content{ 
   background:#fff; 
   width:100%; 
@@ -71,134 +65,37 @@ html,body{ margin:0; padding:0; height:100%; font-family:'Poppins',sans-serif; b
   border-radius:12px; 
   overflow:hidden; 
   box-shadow:0 10px 30px rgba(0,0,0,.25);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  position: relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  position:relative;
 }
 
-/* Estilos específicos para el modal de estudiantes */
-#modalEstudiante .modal-content {
-  max-width: 760px;
-}
-
+/* ===== Modal Estudiantes ===== */
 #modalEstudiante h3{ 
   margin:0; 
   padding:14px 18px; 
   background:#0f8c8c; 
   color:#fff; 
   font-size:18px;
-  text-align: center;
+  text-align:center;
 }
-#formEst{ 
-  padding:16px; 
-}
-.grid-2{ 
-  display:grid; 
-  grid-template-columns:repeat(2,1fr); 
-  gap:12px; 
-  margin:10px 0;
-}
-.grid-2 label{ 
-  display:flex; 
-  flex-direction:column; 
-  gap:6px; 
-  font-size:14px;
-}
-.grid-2 input, .grid-2 select{ 
-  padding:10px; 
-  border:1px solid #d1d5db; 
-  border-radius:8px;
-}
-.modal-actions{ 
-  display:flex; 
-  justify-content:flex-end; 
-  gap:10px; 
-  margin-top:12px;
-}
-.modal-actions .btn{ 
-  background:#0f8c8c; 
-  color:#fff; 
-  font-weight:600;
-}
-.modal-actions .btn.outline{ 
-  background:#e11d48; 
-  color:#fff;
-}
+#formEst{ padding:16px }
+.grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin:10px 0 }
+.grid-2 label{ display:flex; flex-direction:column; gap:6px; font-size:14px }
+.grid-2 input, .grid-2 select{ padding:10px; border:1px solid #d1d5db; border-radius:8px }
+.modal-actions{ display:flex; justify-content:flex-end; gap:10px; margin-top:12px }
+.modal-actions .btn{ background:#0f8c8c; color:#fff; font-weight:600 }
+.modal-actions .btn.outline{ background:#e11d48 }
 
-/* Estilos específicos para el modal de cambio de clave */
-#modalCambioClave .modal-content {
-  max-width: 500px;
-}
-
-#modalCambioClave h2 {
-  font-size: 20px;
-  color: #fff;
-  text-align: center;
-  background-color: #0f8c8c;
-  padding: 15px 10px;
-  margin: 0;
-  border-radius: 0;
-}
-
-#modalCambioClave .formulario {
-  padding: 20px;
-  margin: 0;
-}
-
-#modalCambioClave .formulario label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-}
-
-#modalCambioClave .formulario input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
-}
-
-#modalCambioClave .formulario button {
-  background-color: #0f8c8c;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-right: 10px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-}
-
-#modalCambioClave .formulario button:hover {
-  background-color: #0d7a7a;
-}
-
-#modalCambioClave .formulario button[type="button"] {
-  background-color: #e11d48;
-}
-
-#modalCambioClave .formulario button[type="button"]:hover {
-  background-color: #c81e3d;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 700px){
-  .contenido{ margin-left:0 }
-  .menu{ position:static; width:100% }
-  .grid-2{ grid-template-columns:1fr }
-  
-  /* Modales responsive */
-  .modal-content {
-    margin: 5% auto;
-    width: 95%;
-  }
-  
-  #modalEstudiante .modal-content,
-  #modalCambioClave .modal-content {
-    width: 95%;
-  }
-}
+/* ===== Modal Cambio de Clave ===== */
+#modalCambioClave .modal-content{ max-width:500px }
+#modalCambioClave h2{ font-size:20px; color:#fff; text-align:center; background:#0f8c8c; padding:15px 10px; margin:0; border-radius:0 }
+#modalCambioClave .formulario{ padding:20px; margin:0; font-family:'Poppins',sans-serif }
+#modalCambioClave .formulario label{ display:block; margin-bottom:5px; font-weight:600 }
+#modalCambioClave .formulario input{ width:100%; padding:10px; margin-bottom:15px; border:1px solid #d1d5db; border-radius:8px }
+#modalCambioClave .formulario button{ padding:10px 20px; border:none; border-radius:8px; cursor:pointer; margin-right:10px; font-weight:600; color:white }
+#modalCambioClave .formulario button[type="submit"]{ background:#0f8c8c }
+#modalCambioClave .formulario button[type="submit"]:hover{ background:#0d7a7a }
+#modalCambioClave .formulario button[type="button"]{ background:#e11d48 }
+#modalCambioClave .formulario button[type="button"]:hover{ background:#c81e3d }

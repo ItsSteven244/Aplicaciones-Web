@@ -109,12 +109,3 @@ html,body{ margin:0; padding:0; height:100%; font-family:'Poppins',sans-serif; b
   display: none;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 700px){
-  .contenido{ margin-left:0 }
-  .grid-2{ grid-template-columns:1fr }
-  .logo-preview {
-    width: 100px;
-    height: 100px;
-  }
-}

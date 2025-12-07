@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libros>
+  <libro>
+    <isbn>978-0001</isbn>
+    <titulo>Fundamentos de Programación</titulo>
+    <cantidad>5</cantidad>
+    <autor>Juan Pérez</autor>
+    <editorial>Editorial ABC</editorial>
+    <materia>Programación</materia>
+    <estado>Disponible</estado>
+  </libro>
+  <libro>
+    <isbn>978-0002</isbn>
+    <titulo>Estructuras de Datos</titulo>
+    <cantidad>3</cantidad>
+    <autor>María López</autor>
+    <editorial>Editorial XYZ</editorial>
+    <materia>Programación</materia>
+    <estado>Prestado</estado>
+  </libro>
+</libros>

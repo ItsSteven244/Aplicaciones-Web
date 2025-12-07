@@ -1,91 +1,101 @@
 // === Referencias del DOM - IDs ÚNICOS ===
-const modalUsuario = document.getElementById('modalUsuario');
-const modalCambioClave = document.getElementById('modalCambioClave');
-const btnAdd = document.getElementById('btnAdd');
-const formUsuario = document.getElementById('formUsuario');
-const formCambioClave = document.getElementById('formCambioClave');
-const cancelarUsuario = document.getElementById('cancelarUsuario');
-const cancelarClave = document.getElementById('cancelarClave');
-const modalTituloUsuario = document.getElementById('modalTituloUsuario');
-const selectRol = document.getElementById('rol');
-const searchInput = document.getElementById('searchInput');
+// Modales
+const modalUsuario = document.getElementById('modalUsuario');           // Modal para agregar/editar usuario
+const modalCambioClave = document.getElementById('modalCambioClave');   // Modal para cambiar contraseña
+
+// Botones
+const btnAdd = document.getElementById('btnAdd');                       // Botón para abrir modal usuario
+const cancelarUsuario = document.getElementById('cancelarUsuario');     // Botón para cerrar modal usuario
+const cancelarClave = document.getElementById('cancelarClave');         // Botón para cerrar modal cambio de clave
+
+// Formularios
+const formUsuario = document.getElementById('formUsuario');             // Formulario de usuario
+const formCambioClave = document.getElementById('formCambioClave');     // Formulario de cambio de clave
+
+// Otros elementos
+const modalTituloUsuario = document.getElementById('modalTituloUsuario'); // Título del modal usuario
+const selectRol = document.getElementById('rol');                         // Select de rol de usuario
+const searchInput = document.getElementById('searchInput');               // Input de búsqueda
 
 // === FUNCIONES DE VALIDACIÓN PARA BÚSQUEDA ===
+
+// Validar que el input de búsqueda solo contenga letras, números y espacios
 function validarBusqueda() {
   const termino = searchInput.value.trim();
-  
-  // Validar que solo contenga letras, números y espacios
   const regex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ]*$/;
   
   if (termino && !regex.test(termino)) {
     mostrarErrorBusqueda('Solo letras y números');
     return false;
   }
-  
   return true;
 }
 
-// Función para ejecutar la búsqueda
+// Ejecutar búsqueda en la tabla de usuarios
 function ejecutarBusqueda() {
   const searchTerm = searchInput.value.toLowerCase();
   const rows = document.querySelectorAll('#tablaUsuarios tbody tr');
   
   rows.forEach(row => {
     const text = row.textContent.toLowerCase();
-    row.style.display = text.includes(searchTerm) ? '' : 'none';
+    row.style.display = text.includes(searchTerm) ? '' : 'none';  // Mostrar/ocultar filas
   });
   
   actualizarInfoPaginacion();
 }
 
+// Mostrar mensaje de error de búsqueda
 function mostrarErrorBusqueda(mensaje) {
-  removerMensajesBusqueda();
+  removerMensajesBusqueda(); // Limpiar errores previos
   
   const errorElement = document.createElement('div');
   errorElement.className = 'mensaje-error-busqueda';
   errorElement.textContent = mensaje;
-  errorElement.style.position = 'fixed';
-  errorElement.style.background = '#e74c3c';
-  errorElement.style.color = 'white';
-  errorElement.style.padding = '10px 15px';
-  errorElement.style.borderRadius = '6px';
-  errorElement.style.fontSize = '14px';
-  errorElement.style.fontWeight = 'bold';
-  errorElement.style.zIndex = '10000';
-  errorElement.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
-  errorElement.style.whiteSpace = 'nowrap';
-  errorElement.style.fontFamily = 'Poppins, sans-serif';
+  
+  // Estilos del mensaje
+  Object.assign(errorElement.style, {
+    position: 'fixed',
+    background: '#e74c3c',
+    color: 'white',
+    padding: '10px 15px',
+    borderRadius: '6px',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    zIndex: '10000',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+    whiteSpace: 'nowrap',
+    fontFamily: 'Poppins, sans-serif'
+  });
   
   const rect = searchInput.getBoundingClientRect();
   errorElement.style.top = (rect.bottom + 10) + 'px';
   errorElement.style.left = rect.left + 'px';
   
   document.body.appendChild(errorElement);
-  
   searchInput.style.borderColor = '#e74c3c';
   
   setTimeout(() => {
-    if (errorElement.parentNode) {
-      errorElement.remove();
-    }
+    if (errorElement.parentNode) errorElement.remove();
     searchInput.style.borderColor = '';
   }, 3000);
 }
 
+// Eliminar mensajes de error de búsqueda
 function removerMensajesBusqueda() {
-  const mensajes = document.querySelectorAll('.mensaje-error-busqueda');
-  mensajes.forEach(mensaje => mensaje.remove());
+  document.querySelectorAll('.mensaje-error-busqueda').forEach(mensaje => mensaje.remove());
   searchInput.style.borderColor = '';
 }
 
 // === FUNCIONES DE VALIDACIÓN PARA FORMULARIO USUARIO ===
+
+// Validar todos los campos del formulario de usuario
 function validarFormularioUsuario() {
-  removerMensajesUsuario();
+  removerMensajesUsuario(); // Limpiar errores previos
   
   const formData = new FormData(formUsuario);
   let errores = [];
   
-  // Validar Usuario (formato: e + 10 números + @live.uleam.edu.ec)
+  // Validar campo usuario
   const usuario = formData.get('usuario').trim();
   if (!usuario) {
     errores.push({ campo: 'usuario', mensaje: 'El usuario es obligatorio' });
@@ -93,7 +103,7 @@ function validarFormularioUsuario() {
     errores.push({ campo: 'usuario', mensaje: 'Formato: e0000000000@live.uleam.edu.ec' });
   }
   
-  // Validar Nombre (solo letras, espacios y tildes)
+  // Validar campo nombre
   const nombre = formData.get('nombre').trim();
   if (!nombre) {
     errores.push({ campo: 'nombre', mensaje: 'El nombre es obligatorio' });
@@ -103,7 +113,7 @@ function validarFormularioUsuario() {
     errores.push({ campo: 'nombre', mensaje: 'El nombre debe tener al menos 2 caracteres' });
   }
   
-  // Validar Contraseña (letras y números)
+  // Validar campo contraseña
   const contrasena = formData.get('contrasena').trim();
   if (!contrasena) {
     errores.push({ campo: 'contrasena', mensaje: 'La contraseña es obligatoria' });
@@ -113,7 +123,7 @@ function validarFormularioUsuario() {
     errores.push({ campo: 'contrasena', mensaje: 'Mínimo 6 caracteres' });
   }
   
-  // Validar Confirmar Contraseña
+  // Validar confirmación de contraseña
   const confirmarContrasena = formData.get('confirmarContrasena').trim();
   if (!confirmarContrasena) {
     errores.push({ campo: 'confirmarContrasena', mensaje: 'Confirme la contraseña' });
@@ -121,7 +131,7 @@ function validarFormularioUsuario() {
     errores.push({ campo: 'confirmarContrasena', mensaje: 'Las contraseñas no coinciden' });
   }
   
-  // Mostrar todos los errores
+  // Mostrar errores si existen
   if (errores.length > 0) {
     errores.forEach(error => mostrarErrorUsuario(error.campo, error.mensaje));
     return false;
@@ -130,27 +140,30 @@ function validarFormularioUsuario() {
   return true;
 }
 
+// Mostrar error debajo del input correspondiente en el modal
 function mostrarErrorUsuario(campoId, mensaje) {
-  let elemento = document.getElementById(campoId);
-  
+  const elemento = document.getElementById(campoId);
   if (!elemento) return;
   
   const errorElement = document.createElement('div');
   errorElement.className = 'mensaje-error-usuario';
   errorElement.textContent = mensaje;
-  errorElement.style.position = 'absolute';
-  errorElement.style.background = '#e74c3c';
-  errorElement.style.color = 'white';
-  errorElement.style.padding = '10px 15px';
-  errorElement.style.borderRadius = '6px';
-  errorElement.style.fontSize = '14px';
-  errorElement.style.fontWeight = 'bold';
-  errorElement.style.zIndex = '10000';
-  errorElement.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
-  errorElement.style.whiteSpace = 'nowrap';
-  errorElement.style.fontFamily = 'Poppins, sans-serif';
   
-  // Posicionar relativo al modal
+  // Estilos del mensaje
+  Object.assign(errorElement.style, {
+    position: 'absolute',
+    background: '#e74c3c',
+    color: 'white',
+    padding: '10px 15px',
+    borderRadius: '6px',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    zIndex: '10000',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+    whiteSpace: 'nowrap',
+    fontFamily: 'Poppins, sans-serif'
+  });
+  
   const modalRect = modalUsuario.getBoundingClientRect();
   const elementRect = elemento.getBoundingClientRect();
   
@@ -158,28 +171,22 @@ function mostrarErrorUsuario(campoId, mensaje) {
   errorElement.style.left = (elementRect.left - modalRect.left) + 'px';
   
   modalUsuario.appendChild(errorElement);
-  
-  // Marcar con borde rojo
   elemento.style.borderColor = '#e74c3c';
   
   setTimeout(() => {
-    if (errorElement.parentNode) {
-      errorElement.remove();
-    }
+    if (errorElement.parentNode) errorElement.remove();
   }, 3000);
 }
 
+// Eliminar todos los mensajes de error del modal usuario
 function removerMensajesUsuario() {
-  const mensajes = document.querySelectorAll('.mensaje-error-usuario');
-  mensajes.forEach(mensaje => mensaje.remove());
-  
-  const inputs = formUsuario.querySelectorAll('input, select');
-  inputs.forEach(input => {
-    input.style.borderColor = '';
-  });
+  document.querySelectorAll('.mensaje-error-usuario').forEach(mensaje => mensaje.remove());
+  formUsuario.querySelectorAll('input, select').forEach(input => input.style.borderColor = '');
 }
 
-// === Utilidades para Modal Usuario ===
+// === UTILIDADES PARA MODAL USUARIO ===
+
+// Abrir modal de usuario y configurar título
 function abrirModalUsuario(titulo = 'Nuevo usuario') {
   modalTituloUsuario.textContent = titulo;
   formUsuario.reset();
@@ -187,84 +194,43 @@ function abrirModalUsuario(titulo = 'Nuevo usuario') {
   modalUsuario.classList.remove('oculto');
   document.body.style.overflow = 'hidden';
   
-  // Enfocar el primer input del formulario
   const primerInput = formUsuario.querySelector('input, select, textarea');
   if (primerInput) primerInput.focus();
 }
 
+// Cerrar modal de usuario
 function cerrarModalUsuario() {
   modalUsuario.classList.add('oculto');
   document.body.style.overflow = '';
 }
 
-// === Utilidades para Modal Cambio de Clave ===
+// === UTILIDADES PARA MODAL CAMBIO DE CLAVE ===
+
+// Abrir modal de cambio de contraseña
 function openChangePasswordModal() {
   formCambioClave.reset();
   modalCambioClave.classList.remove('oculto');
   document.body.style.overflow = 'hidden';
   
-  // Enfocar el primer input del formulario
   const primerInput = formCambioClave.querySelector('input, select, textarea');
   if (primerInput) primerInput.focus();
 }
 
+// Cerrar modal de cambio de contraseña
 function closeChangePasswordModal() {
   modalCambioClave.classList.add('oculto');
   document.body.style.overflow = '';
 }
 
-// === Eventos Modal Usuario ===
+// === EVENTOS DE MODALES ===
 btnAdd.addEventListener('click', () => abrirModalUsuario());
 cancelarUsuario.addEventListener('click', cerrarModalUsuario);
-
-// === Eventos Modal Cambio de Clave ===
 cancelarClave.addEventListener('click', closeChangePasswordModal);
 
-// Cerrar modales con Escape
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    if (!modalUsuario.classList.contains('oculto')) {
-      cerrarModalUsuario();
-    }
-    if (!modalCambioClave.classList.contains('oculto')) {
-      closeChangePasswordModal();
-    }
-  }
-});
+modalUsuario.addEventListener('click', (e) => { if (e.target === modalUsuario) cerrarModalUsuario(); });
+modalCambioClave.addEventListener('click', (e) => { if (e.target === modalCambioClave) closeChangePasswordModal(); });
 
-// Cerrar modales al hacer clic fuera
-modalUsuario.addEventListener('click', (e) => {
-  if (e.target === modalUsuario) cerrarModalUsuario();
-});
-
-modalCambioClave.addEventListener('click', (e) => {
-  if (e.target === modalCambioClave) closeChangePasswordModal();
-});
-
-// === Búsqueda en tiempo real ===
-searchInput.addEventListener('input', function() {
-  if (!validarBusqueda()) {
-    return;
-  }
-  ejecutarBusqueda();
-});
-
-// Validar búsqueda con Enter
-searchInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    if (validarBusqueda()) {
-      ejecutarBusqueda();
-    }
-  }
-});
-
-// Limpiar mensajes de búsqueda al escribir
-searchInput.addEventListener('input', function() {
-  removerMensajesBusqueda();
-});
-
-// Limpiar mensajes del formulario al escribir
+// === EVENTOS DEL FORMULARIO USUARIO ===
 formUsuario.querySelectorAll('input').forEach(input => {
   input.addEventListener('input', function() {
     this.style.borderColor = '';
@@ -272,26 +238,20 @@ formUsuario.querySelectorAll('input').forEach(input => {
   });
 });
 
-// Limpiar mensajes del select al cambiar
 selectRol.addEventListener('change', function() {
   this.style.borderColor = '';
   removerMensajesUsuario();
 });
 
-// === Prevenir validación nativa del navegador ===
-formUsuario.addEventListener('invalid', function(e) {
-    e.preventDefault();
-}, true);
+// Evitar comportamiento de validación HTML5 nativa
+formUsuario.addEventListener('invalid', function(e) { e.preventDefault(); }, true);
 
 // Enviar formulario de usuario
 formUsuario.addEventListener('submit', (e) => {
   e.preventDefault();
   
-  if (!validarFormularioUsuario()) {
-    return;
-  }
+  if (!validarFormularioUsuario()) return;
   
-  // Obtener el valor del rol seleccionado
   const rolSeleccionado = selectRol.value;
   const formData = new FormData(formUsuario);
   
@@ -306,20 +266,19 @@ formUsuario.addEventListener('submit', (e) => {
   cerrarModalUsuario();
 });
 
-// Función para el submenú
+// === SUBMENÚ ===
 function toggleSubmenu() {
-  var submenu = document.querySelector('.submenu');
+  const submenu = document.querySelector('.submenu');
   submenu.classList.toggle('open');
 }
 
-// Paginación básica
+// === PAGINACIÓN BÁSICA ===
 const pageSize = document.getElementById('pageSize');
 pageSize.addEventListener('change', function() {
   console.log('Cambiando tamaño de página a:', this.value);
   actualizarInfoPaginacion();
 });
 
-// Actualizar información de paginación
 function actualizarInfoPaginacion() {
   const rows = document.querySelectorAll('#tablaUsuarios tbody tr');
   const totalRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
@@ -327,141 +286,150 @@ function actualizarInfoPaginacion() {
   infoPag.textContent = `Mostrando 0 a 0 de ${totalRows} entradas`;
 }
 
-// Inicializar tabla vacía
 function inicializarTabla() {
   const tbody = document.querySelector('#tablaUsuarios tbody');
   tbody.innerHTML = '';
   actualizarInfoPaginacion();
 }
 
-/*Validar clave*/
+// === FUNCIONES DE VALIDACIÓN PARA CAMBIO DE CLAVE ===
 function validarCambioClave() {
-    removerMensajesClave();
-    
-    const currentPassword = document.getElementById('currentPassword').value.trim();
-    const newPassword = document.getElementById('newPassword').value.trim();
-    const confirmPassword = document.getElementById('confirmPassword').value.trim();
-    
-    let errores = [];
-    
-    // Validar Contraseña Actual (letras Y números)
-    if (!currentPassword) {
-        errores.push({ campo: 'currentPassword', mensaje: 'La contraseña actual es obligatoria' });
-    } else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(currentPassword)) {
-        errores.push({ campo: 'currentPassword', mensaje: 'Debe contener letras y números' });
-    } else if (currentPassword.length < 6) {
-        errores.push({ campo: 'currentPassword', mensaje: 'Mínimo 6 caracteres' });
-    }
-    
-    // Validar Nueva Contraseña (letras Y números)
-    if (!newPassword) {
-        errores.push({ campo: 'newPassword', mensaje: 'La nueva contraseña es obligatoria' });
-    } else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(newPassword)) {
-        errores.push({ campo: 'newPassword', mensaje: 'Debe contener letras y números' });
-    } else if (newPassword.length < 6) {
-        errores.push({ campo: 'newPassword', mensaje: 'Mínimo 6 caracteres' });
-    }
-    
-    // Validar Confirmar Contraseña
-    if (!confirmPassword) {
-        errores.push({ campo: 'confirmPassword', mensaje: 'Confirme la nueva contraseña' });
-    } else if (newPassword !== confirmPassword) {
-        errores.push({ campo: 'confirmPassword', mensaje: 'Las contraseñas no coinciden' });
-    }
-    
-    // Mostrar todos los errores
-    if (errores.length > 0) {
-        errores.forEach(error => mostrarErrorClave(error.campo, error.mensaje));
-        return false;
-    }
-    
-    return true;
+  removerMensajesClave();
+  
+  const currentPassword = document.getElementById('currentPassword').value.trim();
+  const newPassword = document.getElementById('newPassword').value.trim();
+  const confirmPassword = document.getElementById('confirmPassword').value.trim();
+  
+  let errores = [];
+  
+  if (!currentPassword) errores.push({ campo: 'currentPassword', mensaje: 'La contraseña actual es obligatoria' });
+  else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(currentPassword)) errores.push({ campo: 'currentPassword', mensaje: 'Debe contener letras y números' });
+  else if (currentPassword.length < 6) errores.push({ campo: 'currentPassword', mensaje: 'Mínimo 6 caracteres' });
+  
+  if (!newPassword) errores.push({ campo: 'newPassword', mensaje: 'La nueva contraseña es obligatoria' });
+  else if (!/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(newPassword)) errores.push({ campo: 'newPassword', mensaje: 'Debe contener letras y números' });
+  else if (newPassword.length < 6) errores.push({ campo: 'newPassword', mensaje: 'Mínimo 6 caracteres' });
+  
+  if (!confirmPassword) errores.push({ campo: 'confirmPassword', mensaje: 'Confirme la nueva contraseña' });
+  else if (newPassword !== confirmPassword) errores.push({ campo: 'confirmPassword', mensaje: 'Las contraseñas no coinciden' });
+  
+  if (errores.length > 0) {
+    errores.forEach(error => mostrarErrorClave(error.campo, error.mensaje));
+    return false;
+  }
+  
+  return true;
 }
 
 function mostrarErrorClave(campoId, mensaje) {
-    let elemento = document.getElementById(campoId);
-    
-    if (!elemento) return;
-    
-    const errorElement = document.createElement('div');
-    errorElement.className = 'mensaje-error-clave';
-    errorElement.textContent = mensaje;
-    errorElement.style.position = 'fixed';
-    errorElement.style.background = '#e74c3c';
-    errorElement.style.color = 'white';
-    errorElement.style.padding = '10px 15px';
-    errorElement.style.borderRadius = '6px';
-    errorElement.style.fontSize = '14px';
-    errorElement.style.fontWeight = 'bold';
-    errorElement.style.zIndex = '10000';
-    errorElement.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
-    errorElement.style.whiteSpace = 'nowrap';
-    errorElement.style.fontFamily = 'Poppins, sans-serif';
-    
-    const rect = elemento.getBoundingClientRect();
-    errorElement.style.top = (rect.bottom + 10) + 'px';
-    errorElement.style.left = rect.left + 'px';
-    
-    document.body.appendChild(errorElement);
-    
-    // Marcar con borde rojo
-    elemento.style.borderColor = '#e74c3c';
-    
-    setTimeout(() => {
-        if (errorElement.parentNode) {
-            errorElement.remove();
-        }
-        elemento.style.borderColor = '';
-    }, 3000);
+  const elemento = document.getElementById(campoId);
+  if (!elemento) return;
+  
+  const errorElement = document.createElement('div');
+  errorElement.className = 'mensaje-error-clave';
+  errorElement.textContent = mensaje;
+  
+  Object.assign(errorElement.style, {
+    position: 'fixed',
+    background: '#e74c3c',
+    color: 'white',
+    padding: '10px 15px',
+    borderRadius: '6px',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    zIndex: '10000',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+    whiteSpace: 'nowrap',
+    fontFamily: 'Poppins, sans-serif'
+  });
+  
+  const rect = elemento.getBoundingClientRect();
+  errorElement.style.top = (rect.bottom + 10) + 'px';
+  errorElement.style.left = rect.left + 'px';
+  
+  document.body.appendChild(errorElement);
+  elemento.style.borderColor = '#e74c3c';
+  
+  setTimeout(() => {
+    if (errorElement.parentNode) errorElement.remove();
+    elemento.style.borderColor = '';
+  }, 3000);
 }
 
 function removerMensajesClave() {
-    const mensajes = document.querySelectorAll('.mensaje-error-clave');
-    mensajes.forEach(mensaje => mensaje.remove());
-    
-    const inputs = document.querySelectorAll('#modalCambioClave input');
-    inputs.forEach(input => {
-        input.style.borderColor = '';
-    });
+  document.querySelectorAll('.mensaje-error-clave').forEach(mensaje => mensaje.remove());
+  document.querySelectorAll('#modalCambioClave input').forEach(input => input.style.borderColor = '');
 }
 
 // === CONFIGURACIÓN UNIFICADA DEL FORMULARIO DE CAMBIO DE CLAVE ===
 document.addEventListener('DOMContentLoaded', function() {
-    const formCambioClave = document.getElementById('formCambioClave');
+  const formCambioClave = document.getElementById('formCambioClave');
+  
+  if (formCambioClave) {
+    // Prevenir validación nativa HTML5
+    formCambioClave.addEventListener('invalid', function(e) { e.preventDefault(); }, true);
     
-    if (formCambioClave) {
-        // Prevenir la validación nativa
-        formCambioClave.addEventListener('invalid', function(e) {
-            e.preventDefault();
-        }, true);
-        
-        // Reemplazar el event listener del submit
-        formCambioClave.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (validarCambioClave()) {
-                alert('Contraseña cambiada correctamente');
-                closeChangePasswordModal();
-            }
-        });
-        
-        // Limpiar mensajes al escribir en los campos
-        const inputs = formCambioClave.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('input', function() {
-                this.style.borderColor = '';
-                removerMensajesClave();
-            });
-        });
-    }
+    // Enviar formulario de cambio de clave
+    formCambioClave.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (validarCambioClave()) {
+        alert('Contraseña cambiada correctamente');
+        closeChangePasswordModal();
+      }
+    });
     
-    // Inicializar tabla
-    inicializarTabla();
+    // Limpiar errores al escribir en los inputs
+    formCambioClave.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', function() {
+        this.style.borderColor = '';
+        removerMensajesClave();
+      });
+    });
+  }
+  
+  // Inicializar tabla al cargar la página
+  inicializarTabla();
 });
 
-// Hacer funciones globales
-window.openChangePasswordModal = openChangePasswordModal;
-window.closeChangePasswordModal = closeChangePasswordModal;
-window.toggleSubmenu = toggleSubmenu;
-window.validarCambioClave = validarCambioClave;
-window.ejecutarBusqueda = ejecutarBusqueda;
+
+//Formato semiestructurado xml
+
+function cargarUsuariosXML() {
+  fetch('Usuarios.xml')
+    .then(res => res.text())
+    .then(str => {
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(str, "application/xml");
+      const usuarios = xmlDoc.getElementsByTagName('usuario');
+      const tbody = document.querySelector('#tablaUsuarios tbody');
+      tbody.innerHTML = '';
+
+      for (let i = 0; i < usuarios.length; i++) {
+        const id = usuarios[i].getElementsByTagName('id')[0].textContent;
+        const nombre = usuarios[i].getElementsByTagName('nombre')[0].textContent;
+        const correo = usuarios[i].getElementsByTagName('correo')[0].textContent;
+        const estado = usuarios[i].getElementsByTagName('estado')[0].textContent;
+        const rol = usuarios[i].getElementsByTagName('rol')[0].textContent;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${id}</td>
+          <td>${nombre}</td>
+          <td>${correo}</td>
+          <td>${estado}</td>
+          <td>${rol}</td>
+          <td>
+            <button class="btn-edit">Editar</button>
+            <button class="btn-delete">Eliminar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      actualizarInfoPaginacion();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  cargarUsuariosXML();
+});

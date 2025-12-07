@@ -1,0 +1,13 @@
+[
+  {
+    "id": "L001",
+    "titulo": "Cien años de soledad",
+    "isbn": "978-8437604947",
+    "imagen": "Imágenes/libro1.jpg",
+    "descripcion": "Una novela del realismo mágico que cuenta la historia de la familia Buendía en Macondo.",
+    "cantidad": 5,
+    "materia": "Literatura",
+    "autor": "Gabriel García Márquez",
+    "editorial": "Sudamericana"
+  }
+]
